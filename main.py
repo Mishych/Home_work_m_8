@@ -6,7 +6,7 @@ def get_birthdays_per_week(users):
     data = {}
     if not users:
         return data
-    start_date = datetime.now()
+    start_date = date.today()
     result = {}
     for _ in range(8):
         result[start_date.day, start_date.month] = start_date.year
@@ -14,10 +14,12 @@ def get_birthdays_per_week(users):
     
     for user in users:
         bd: date = user["birthday"]
-        bd = bd.replace(year = start_date.year)
-        wekk = day_of_weeks[bd.weekday()]
+        # bd = bd.replace(year = start_date.year)
+        # wekk = day_of_weeks[bd.weekday()]
         date_bd = bd.day, bd.month
         if date_bd in list(result):
+            bd = bd.replace(year = start_date.year)
+            wekk = day_of_weeks[bd.weekday()]
             if wekk not in data:
                 data[wekk] = []
             data[wekk].append(user["name"])
