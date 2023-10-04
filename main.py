@@ -8,14 +8,13 @@ def get_birthdays_per_week(users):
         return data
     start_date = date.today()
     result = {}
+    
     for _ in range(8):
         result[start_date.day, start_date.month] = start_date.year
         start_date += timedelta(1)
     
     for user in users:
         bd: date = user["birthday"]
-        # bd = bd.replace(year = start_date.year)
-        # wekk = day_of_weeks[bd.weekday()]
         date_bd = bd.day, bd.month
         if date_bd in list(result):
             bd = bd.replace(year = start_date.year)
@@ -24,7 +23,6 @@ def get_birthdays_per_week(users):
                 data[wekk] = []
             data[wekk].append(user["name"])
     return data
-
 
 if __name__ == "__main__":
     users = [
